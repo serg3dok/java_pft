@@ -30,7 +30,7 @@ public class ContactCreationTests extends TestBase{
                 "home2",
                 "notes"));
         app.sendContactForm();
-        app.gotoHomePage();
+        app.getNavigationHelper().gotoHomePage();
     }
 
 
