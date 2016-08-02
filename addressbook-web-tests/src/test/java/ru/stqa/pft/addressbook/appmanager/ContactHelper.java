@@ -44,7 +44,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/select[3]//option[3]"));
         click(By.xpath("//div[@id='content']/form/select[4]//option[5]"));
         type(By.name("ayear"), contactData.getAnYear());
-        click(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
+        //click(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getHome2());
         type(By.name("notes"), contactData.getNotes());
@@ -63,6 +63,15 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//form[2]/div[2]/input"));
         alertAccept();
 
+    }
+
+    public void editContact() {
+        click(By.xpath("//*[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+
+    }
+
+    public void clickUpdateContactButton() {
+        click(By.name("update"));
     }
 
 
