@@ -63,7 +63,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("notes"), contactData.getNotes());
     }
 
-    public void addNewContact() {
+    public void initContactCreation() {
         click(By.linkText("add new"));
     }
 
@@ -88,4 +88,16 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public boolean isThereAContact() {
+        return isElementPresent(By.xpath("//*[@id='maintable']/tbody/tr[2]/td[1]"));
+        //return isElementPresent(By.name("entry"));
+    }
+
+    public void createContact(ContactData contactData, boolean creation) {
+        initContactCreation();
+        fillContactCreationForm(contactData, creation);
+        sendContactForm();
+
+
+    }
 }
