@@ -28,7 +28,8 @@ public class ContactCreationTests extends TestBase{
                 "2000",
                 "address2",
                 "home2",
-                "notes"));
+                "notes",
+                "test1"), true);
         app.getContactHelper().sendContactForm();
         app.getNavigationHelper().gotoHomePage();
     }
