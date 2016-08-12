@@ -4,6 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.HashSet;
+import java.util.List;
+
 /**
  * Created by IEUser on 8/1/2016.
  */
@@ -12,10 +15,10 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() {
         app.getNavigationHelper().gotoHomePage();
-        int before = app.getContactHelper().getContactCount();
+
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("username",
-                    "Rober",
+                    "Robert",
                     "Radrigez",
                     "Jora",
                     "facility worker",
@@ -36,15 +39,41 @@ public class ContactModificationTests extends TestBase {
                     "notes blah blah blah",
                     "test1"));
         }
+        List<ContactData> before = app.getContactHelper().getContactList();
         app.getNavigationHelper().gotoHomePage();
         app.getContactHelper().selectFirstContact();
-        app.getContactHelper().editContact();
+        app.getContactHelper().initEditContact();
+        ContactData contact = new ContactData(before.get(before.size() -1).getId(), "John",
+                "Mc",
+                "Smith",
+                "JS",
+                "CEO",
+                "Corp",
+                "MTW",
+                "555",
+                "123",
+                "232323",
+                "12312",
+                "sasa@sds",
+                "sasa",
+                "sdsds",
+                "sdsdspage",
+                "1990",
+                "1988",
+                "",
+                "",
+                "",
+                null);
 
-        app.getContactHelper().fillContactCreationForm(new ContactData("John", "Mc", "Smith", "JS", "CEO", "Corp", "MTW", "555", "123", "232323", "12312", "sasa@sds", "sasa",
-                "sdsds", "sdsdspage", "1990", "1988", "", "", "", null), false);
+        app.getContactHelper().fillContactCreationForm(contact, false);
         app.getContactHelper().clickUpdateContactButton();
         app.getNavigationHelper().gotoHomePage();
-        int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(before, after);
+        List<ContactData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(before.size(),after.size());
+
+        before.remove(before.size() -1);
+        before.add(contact);
+
+        Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
     }
 }

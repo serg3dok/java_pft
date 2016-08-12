@@ -1,10 +1,8 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -28,7 +26,7 @@ public class ContactHelper extends HelperBase {
 
     public void fillContactCreationForm(ContactData contactData, boolean creation) {
 
-        type(By.name("firstname"), contactData.getUsername());
+        type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getLastname());
 
@@ -82,7 +80,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void editContact() {
+    public void initEditContact() {
         click(By.xpath("//*[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
 
     }
@@ -111,20 +109,20 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<>();
-        int rows = wd.findElements(By.name("entry")).size();
+        List<WebElement> rows = wd.findElements(By.name("entry"));
 
-        for (int i = 2; i < rows+2; i++) {
-            //String name = element.getText();
-            String lastname = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i + "]/td[2]")).getText();
-            String firstname = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i + "]/td[3]")).getText();
-            String address = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[2]/td[" + i + "]")).getText();
+        for (WebElement row : rows) {
+            int id = Integer.parseInt(row.findElement(By.xpath("//*/td[1]")).findElement(By.tagName("input")).getAttribute("id")); // id
+            String lastname = row.findElement(By.xpath("//*/td[2]")).getText(); // last name
+            String firstname = wd.findElement(By.xpath("//*/td[3]")).getText(); // first name
+            String address = wd.findElement(By.xpath("//*/td[4]")).getText();  // address
 
-            String email1 = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[1]")).getText();
-            String email2 = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[2]")).getText();
-            String email3 = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[3]")).getText();
+            /*String email1 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[1]")).getText();
+            String email2 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[2]")).getText();
+            String email3 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[3]")).getText();*/
 
 
-            ContactData contact = new ContactData(firstname, lastname, address, null, null, null, null, null, null,
+            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, address, null, null,
                     null, null, null, null, null, null, null, null, null, null, null, null );
             contacts.add(contact);
         }

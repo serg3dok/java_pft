@@ -1,7 +1,9 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-    private final String username;
+
+    private int id;
+    private final String firstName;
     private final String middlename;
     private final String lastname;
     private final String nickname;
@@ -23,8 +25,9 @@ public class ContactData {
     private final String notes;
     private String group;
 
-    public ContactData(String username, String middlename, String lastname, String nickname, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String year, String anYear, String address2, String home2, String notes, String group) {
-        this.username = username;
+    public ContactData(int id, String firstName, String middlename, String lastname, String nickname, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String year, String anYear, String address2, String home2, String notes, String group) {
+        this.id = id;
+        this.firstName = firstName;
         this.middlename = middlename;
         this.lastname = lastname;
         this.nickname = nickname;
@@ -47,8 +50,44 @@ public class ContactData {
         this.group = group;
     }
 
-    public String getUsername() {
-        return username;
+
+
+    public ContactData(String firstName, String middlename, String lastname, String nickname, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String year, String anYear, String address2, String home2, String notes, String group) {
+        this.id = 0;
+        this.firstName = firstName;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.nickname = nickname;
+
+        this.title = title;
+        this.company = company;
+        this.address = address;
+        this.homePhone = homePhone;
+        this.mobilePhone = mobilePhone;
+        this.workPhone = workPhone;
+        this.faxPhone = faxPhone;
+        this.email = email;
+        this.email2 = email2;
+        this.email3 = email3;
+        this.homepage = homepage;
+        this.year = year;
+        this.anYear = anYear;
+        this.address2 = address2;
+        this.home2 = home2;
+        this.notes = notes;
+        this.group = group;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getMiddlename() {
@@ -134,4 +173,41 @@ public class ContactData {
     public void setGroup(String group) {
         this.group = group;
     }
+
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "firstName='" + firstName + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (id != that.id) return false;
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        return address != null ? address.equals(that.address) : that.address == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
+    }
+
+
+
 }
