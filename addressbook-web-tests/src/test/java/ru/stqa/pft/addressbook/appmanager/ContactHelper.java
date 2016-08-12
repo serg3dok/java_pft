@@ -3,10 +3,14 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IEUser on 8/1/2016.
@@ -103,5 +107,27 @@ public class ContactHelper extends HelperBase {
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<>();
+        int rows = wd.findElements(By.name("entry")).size();
+
+        for (int i = 2; i < rows+2; i++) {
+            //String name = element.getText();
+            String lastname = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i + "]/td[2]")).getText();
+            String firstname = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i + "]/td[3]")).getText();
+            String address = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[2]/td[" + i + "]")).getText();
+
+            String email1 = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[1]")).getText();
+            String email2 = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[2]")).getText();
+            String email3 = wd.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[3]")).getText();
+
+
+            ContactData contact = new ContactData(firstname, lastname, address, null, null, null, null, null, null,
+                    null, null, null, null, null, null, null, null, null, null, null, null );
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
