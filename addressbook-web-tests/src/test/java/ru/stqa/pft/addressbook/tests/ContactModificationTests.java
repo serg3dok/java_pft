@@ -41,11 +41,13 @@ public class ContactModificationTests extends TestBase {
                     "notes blah blah blah",
                     "test1"));
         }
+
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getNavigationHelper().gotoHomePage();
-        app.getContactHelper().selectFirstContact();
-        app.getContactHelper().initEditContact();
-        ContactData contact = new ContactData(before.get(before.size() -1).getId(), "John",
+
+        //app.getContactHelper().selectFirstContact();
+        app.getContactHelper().initEditContact(before.size() - 1);
+        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "John",
                 "Mc",
                 "Smith",
                 "JS",
