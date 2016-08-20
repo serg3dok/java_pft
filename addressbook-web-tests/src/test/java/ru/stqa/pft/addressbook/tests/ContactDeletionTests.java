@@ -37,8 +37,7 @@ public class ContactDeletionTests extends TestBase {
                     "1900",
                     "addresddasdss2",
                     "home2",
-                    "notes blah blah blah",
-                    "test1"));
+                    "notes blah blah blah"));
         }
         app.getNavigationHelper().gotoHomePage();
 

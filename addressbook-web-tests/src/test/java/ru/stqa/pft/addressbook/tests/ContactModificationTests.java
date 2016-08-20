@@ -38,12 +38,13 @@ public class ContactModificationTests extends TestBase {
                     "1900",
                     "addresddasdss2",
                     "home2",
-                    "notes blah blah blah",
-                    "asassa"));
+                    "notes blah blah blah"));
         }
 
-        List<ContactData> before = app.getContactHelper().getContactList();
+
         app.getNavigationHelper().gotoHomePage();
+
+        List<ContactData> before = app.getContactHelper().getContactList();
 
         //app.getContactHelper().selectFirstContact();
         int id = 0;
@@ -61,6 +62,8 @@ public class ContactModificationTests extends TestBase {
         }
 
         app.getContactHelper().initEditContact(row);
+        //System.out.println(before.get(before.size() - 1).getId());
+
         ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "John",
                 "Mc",
                 "Smith",
@@ -81,7 +84,7 @@ public class ContactModificationTests extends TestBase {
                 "",
                 "",
                 "",
-                null);
+                "");
 
         app.getContactHelper().fillContactCreationForm(contact, false);
         app.getContactHelper().clickUpdateContactButton();

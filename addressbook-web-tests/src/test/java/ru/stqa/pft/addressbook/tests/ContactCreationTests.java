@@ -38,8 +38,7 @@ public class ContactCreationTests extends TestBase{
                 "2000",
                 "address2",
                 "home2",
-                "notes",
-                "asassa");
+                "notes");
         app.getContactHelper().createContact(newContact);
         app.getNavigationHelper().gotoHomePage();
 

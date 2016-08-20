@@ -23,7 +23,7 @@ public class ContactData {
     private final String address2;
     private final String home2;
     private final String notes;
-    private String group;
+    //private String group;
 
     public ContactData(int id, String firstName, String middlename, String lastname, String nickname, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String year, String anYear, String address2, String home2, String notes, String group) {
         this.id = id;
@@ -47,7 +47,7 @@ public class ContactData {
         this.address2 = address2;
         this.home2 = home2;
         this.notes = notes;
-        this.group = group;
+        //this.group = group;
     }
 
 
@@ -84,7 +84,7 @@ public class ContactData {
         return result;
     }
 
-    public ContactData(String firstName, String middlename, String lastname, String nickname, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String year, String anYear, String address2, String home2, String notes, String group) {
+    public ContactData(String firstName, String middlename, String lastname, String nickname, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String year, String anYear, String address2, String home2, String notes) {
         this.id = 0;
         this.firstName = firstName;
         this.middlename = middlename;
@@ -108,7 +108,7 @@ public class ContactData {
         this.address2 = address2;
         this.home2 = home2;
         this.notes = notes;
-        this.group = group;
+        //this.group = group;
     }
 
     public int getId() {
@@ -199,13 +199,13 @@ public class ContactData {
         return notes;
     }
 
-    public String getGroup() {
+ /*   public String getGroup() {
         return group;
     }
 
     public void setGroup(String group) {
         this.group = group;
-    }
+    }*/
 
 
 }

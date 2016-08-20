@@ -55,11 +55,11 @@ public class ContactHelper extends HelperBase {
         type(By.name("phone2"), contactData.getHome2());
         type(By.name("notes"), contactData.getNotes());
 
-        if (creation) {
+/*        if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else  {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
+        }*/
 
     }
 
