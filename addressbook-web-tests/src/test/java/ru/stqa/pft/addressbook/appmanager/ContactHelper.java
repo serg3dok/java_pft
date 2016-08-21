@@ -3,8 +3,6 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactCreationForm(ContactData contactData, boolean creation) {
+    public void fillForm(ContactData contactData, boolean creation) {
 
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddlename());
@@ -63,21 +61,21 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void initContactCreation() {
+    public void initCreation() {
         click(By.linkText("add new"));
     }
 
-    public void selectFirstContact()  {
+    public void selectFirst()  {
         click(By.xpath("//*[@type='checkbox']"));
 
     }
 
-    public void selectContact(int record)  {
+    public void select(int record)  {
         click(By.xpath("//tr[" + record + "]/td[1]"));
 
     }
 
-    public void deleteContact()  {
+    public void delete()  {
         click(By.xpath("//form[2]/div[2]/input"));
         alertAccept();
 
@@ -88,7 +86,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void initEditContact(int record) {
+    public void initEdit(int record) {
         wd.findElements(By.xpath("//td[8]/a/img")).get(record).click();
     }
 
@@ -102,19 +100,19 @@ public class ContactHelper extends HelperBase {
         //return isElementPresent(By.name("entry"));
     }
 
-    public void createContact(ContactData contactData) {
-        initContactCreation();
-        fillContactCreationForm(contactData, true);
+    public void create(ContactData contactData) {
+        initCreation();
+        fillForm(contactData, true);
         sendContactForm();
 
 
     }
 
-    public int getContactCount() {
+    public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();
         List<WebElement> rows = wd.findElements(By.name("entry"));
 
@@ -158,6 +156,13 @@ public class ContactHelper extends HelperBase {
             }
         }
         return row;
+    }
+
+    public void modify(int index, ContactData contact) {
+        initEdit(index);
+        fillForm(contact, false);
+        clickUpdateContactButton();
+
     }
 
 

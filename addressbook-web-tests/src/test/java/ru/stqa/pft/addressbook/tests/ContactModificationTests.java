@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
@@ -12,12 +13,12 @@ import java.util.List;
  */
 public class ContactModificationTests extends TestBase {
 
-    @Test
-    public void testContactModification() {
-        app.goTo().gotoHomePage();
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().homePage();
 
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData("username",
+        if (app.contacts().list().size() == 0) {
+            app.contacts().create(new ContactData("username",
                     "Robert",
                     "Radrigez",
                     "Jora",
@@ -38,11 +39,14 @@ public class ContactModificationTests extends TestBase {
                     "home2",
                     "notes blah blah blah"));
         }
+    }
 
+    @Test
+    public void testContactModification() {
 
-        app.goTo().gotoHomePage();
+        app.goTo().homePage();
 
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contacts().list();
         int index = before.size() - 1;
         ContactData contact = new ContactData(before.get(index).getId(), "John",
                 "Mc",
@@ -66,20 +70,10 @@ public class ContactModificationTests extends TestBase {
                 "",
                 "");
 
-        //app.getContactHelper().selectFirstContact();
-  //      int row = app.getContactHelper().lastRowById(before);
-
-        app.getContactHelper().initEditContact(index);
-        //System.out.println(before.get(before.size() - 1).getId());
-
-
-
-        app.getContactHelper().fillContactCreationForm(contact, false);
-        app.getContactHelper().clickUpdateContactButton();
-        app.goTo().gotoHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contacts().modify(index, contact);
+        app.goTo().homePage();
+        List<ContactData> after = app.contacts().list();
         Assert.assertEquals(before.size(),after.size());
-
 
         before.remove(index);
         before.add(contact);
@@ -89,14 +83,10 @@ public class ContactModificationTests extends TestBase {
         after.sort(byId);
 
 
-
-        for (int i = 0; i < before.size(); i++) {
-            System.out.println("id: " + before.get(i).getId() + " | " + after.get(i).getId());
-            //System.out.println("firstName: " + before.get(i).getFirstName() + "  | " + after.get(i).getFirstName());
-        }
-
         Assert.assertEquals(before, after);
     }
+
+
 
 
 }
