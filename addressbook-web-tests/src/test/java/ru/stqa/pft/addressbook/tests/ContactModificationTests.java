@@ -43,26 +43,8 @@ public class ContactModificationTests extends TestBase {
         app.goTo().gotoHomePage();
 
         List<ContactData> before = app.getContactHelper().getContactList();
-
-        //app.getContactHelper().selectFirstContact();
-        int id = 0;
-        for (int i = 0; i < before.size(); i++) {
-            if (id < before.get(i).getId()) id = before.get(i).getId();
-        }
-        int row = 0;
-        for (int i = 0; i < before.size(); i++) {
-            if (before.get(i).getId() == id) {
-                break;
-            }
-            else {
-                row++;
-            }
-        }
-
-        app.getContactHelper().initEditContact(row);
-        //System.out.println(before.get(before.size() - 1).getId());
-
-        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "John",
+        int index = before.size() - 1;
+        ContactData contact = new ContactData(before.get(index).getId(), "John",
                 "Mc",
                 "Smith",
                 "JS",
@@ -84,6 +66,14 @@ public class ContactModificationTests extends TestBase {
                 "",
                 "");
 
+        //app.getContactHelper().selectFirstContact();
+  //      int row = app.getContactHelper().lastRowById(before);
+
+        app.getContactHelper().initEditContact(index);
+        //System.out.println(before.get(before.size() - 1).getId());
+
+
+
         app.getContactHelper().fillContactCreationForm(contact, false);
         app.getContactHelper().clickUpdateContactButton();
         app.goTo().gotoHomePage();
@@ -91,15 +81,22 @@ public class ContactModificationTests extends TestBase {
         Assert.assertEquals(before.size(),after.size());
 
 
-
+        before.remove(index);
+        before.add(contact);
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
 
         before.sort(byId);
         after.sort(byId);
 
-        before.remove(before.size() -1);
-        before.add(contact);
+
+
+        for (int i = 0; i < before.size(); i++) {
+            System.out.println("id: " + before.get(i).getId() + " | " + after.get(i).getId());
+            //System.out.println("firstName: " + before.get(i).getFirstName() + "  | " + after.get(i).getFirstName());
+        }
 
         Assert.assertEquals(before, after);
     }
+
+
 }

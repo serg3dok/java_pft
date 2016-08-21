@@ -118,6 +118,7 @@ public class ContactHelper extends HelperBase {
         List<ContactData> contacts = new ArrayList<>();
         List<WebElement> rows = wd.findElements(By.name("entry"));
 
+        System.out.println(rows.size());
         int i = 2;
         for (WebElement row : rows) {
             int id = Integer.parseInt(row.findElement(By.name("selected[]")).getAttribute("id")); // id
@@ -132,10 +133,31 @@ public class ContactHelper extends HelperBase {
             ContactData contact = new ContactData( id,  firstname, null, lastname, null, null, null, address, null, null,
                     null, null, null, null, null, null, null, null, null, null, null, null );
             contacts.add(contact);
+            System.out.println("i = " + i);
             i++;
         }
 
         return contacts;
+    }
+
+
+    public int lastRowById(List<ContactData> before) {
+        int id = 0;
+        // find last id
+        for (int i = 0; i < before.size(); i++) {
+            if (id < before.get(i).getId()) id = before.get(i).getId();
+        }
+        int row = 0;
+        // find row of id
+        for (int i = 0; i < before.size(); i++) {
+            if (before.get(i).getId() == id) {
+                break;
+            }
+            else {
+                row++;
+            }
+        }
+        return row;
     }
 
 
