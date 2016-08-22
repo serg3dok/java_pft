@@ -17,26 +17,10 @@ public class ContactDeletionTests extends TestBase {
         app.goTo().homePage();
 
         if (app.contacts().list().size() == 0) {
-            app.contacts().create(new ContactData("username",
-                    "Robert",
-                    "Radrigez",
-                    "Jora",
-                    "facility worker",
-                    "Robots and parts",
-                    "Mountain View, California",
-                    "123156489",
-                    "54984615",
-                    "65168465156",
-                    "56146846",
-                    "esdasdasd@mail",
-                    "email2@sdfsdfs",
-                    "email3@sdfsdfs",
-                    "dasda.sadas.com",
-                    "1960",
-                    "1900",
-                    "addresddasdss2",
-                    "home2",
-                    "notes blah blah blah"));
+            app.contacts().create(new ContactData().withFirstName("username").withMiddlename("middlename").withLastname("lastname").withNickname("nickname").withTitle("title").
+                    withCompany("company1").withAddress("address").withHomePhone("homePhone").withMobilePhone("mobilePhone").withWorkPhone("workPhone").withFaxPhone("faxPhone").
+                    withEmail("email").withEmail2("email2").withEmail3("email3").withHomepage("homepage").withBirthdayYear("1980").withAnYear("2000").withAddress2("address2").
+                    withHome2("home2").withNotes("notes"));
         }
     }
 

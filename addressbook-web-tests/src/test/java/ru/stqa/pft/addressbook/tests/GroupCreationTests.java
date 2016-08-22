@@ -10,15 +10,7 @@ import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
-    @BeforeMethod
-    public void ensurePreconditions() {
-        app.goTo().groupPage();
 
-        if (app.group().list().size() == 0) {
-            app.group().create(new GroupData("myGroup", "test2", "test3"));
-
-        }
-    }
 
     @Test
     public void testGroupCreation() {
@@ -26,7 +18,7 @@ public class GroupCreationTests extends TestBase {
 
         app.goTo().groupPage();
         List<GroupData> before = app.group().list();
-        GroupData group = new GroupData("myGroup", "header4", "footer4");
+        GroupData group = new GroupData().withName("First Name");
         app.group().create(group);
 
         List<GroupData> after = app.group().list();

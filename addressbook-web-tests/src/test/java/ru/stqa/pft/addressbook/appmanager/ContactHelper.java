@@ -128,10 +128,8 @@ public class ContactHelper extends HelperBase {
             String email2 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[2]")).getText();
             String email3 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[3]")).getText();*/
 
-            ContactData contact = new ContactData( id,  firstname, null, lastname, null, null, null, address, null, null,
-                    null, null, null, null, null, null, null, null, null, null, null, null );
-            contacts.add(contact);
-            System.out.println("i = " + i);
+            contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastname(lastname).withAddress(address));
+
             i++;
         }
 
