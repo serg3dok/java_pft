@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,11 +113,35 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<>();
+//    public List<ContactData> list() {
+//        List<ContactData> contacts = new ArrayList<>();
+//        List<WebElement> rows = wd.findElements(By.name("entry"));
+//
+//        System.out.println(rows.size());
+//        int i = 2;
+//        for (WebElement row : rows) {
+//            int id = Integer.parseInt(row.findElement(By.name("selected[]")).getAttribute("id")); // id
+//            String lastname = row.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[2]")).getText(); // last name
+//            String firstname = row.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[3]")).getText(); // first name
+//            String address = row.findElement(By.xpath("//*[@id='maintable']/tbody/tr[" + i +"]/td[4]")).getText();  // address
+//
+//            /*String email1 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[1]")).getText();
+//            String email2 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[2]")).getText();
+//            String email3 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[3]")).getText();*/
+//
+//            contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastname(lastname).withAddress(address));
+//
+//            i++;
+//        }
+//
+//        return contacts;
+//    }
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> rows = wd.findElements(By.name("entry"));
 
-        System.out.println(rows.size());
+        //System.out.println(rows.size());
         int i = 2;
         for (WebElement row : rows) {
             int id = Integer.parseInt(row.findElement(By.name("selected[]")).getAttribute("id")); // id
@@ -135,7 +160,6 @@ public class ContactHelper extends HelperBase {
 
         return contacts;
     }
-
 
     public int lastRowById(List<ContactData> before) {
         int id = 0;
