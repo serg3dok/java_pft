@@ -70,4 +70,8 @@ public class ApplicationManager {
     public ContactHelper contacts() {
         return contactHelper;
     }
+
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }

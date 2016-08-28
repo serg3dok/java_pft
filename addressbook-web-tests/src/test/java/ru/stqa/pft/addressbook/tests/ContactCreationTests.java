@@ -29,10 +29,13 @@ public class ContactCreationTests extends TestBase{
         app.contacts().create(newContact);
         app.goTo().homePage();
 
+        assertThat(app.count(), equalTo(before.size()+1));
+
         Contacts after = app.contacts().all();
         //Assert.assertEquals(after.size(), before.size() +1);
         //before.add(newContact);
-        assertThat(after.size(), equalTo(before.size()+1));
+        //assertThat(after.size(), equalTo(before.size()+1));
+
 
         assertThat(after, equalTo(
                 before.withAdded(newContact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
