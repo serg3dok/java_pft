@@ -76,10 +76,25 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void delete()  {
-        click(By.xpath("//form[2]/div[2]/input"));
+    public void deletePop()  {
+
         alertAccept();
 
+    }
+
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        deleteSelectedContact();
+        deletePop();
+
+    }
+
+    private void deleteSelectedContact() {
+        click(By.xpath("//form[2]/div[2]/input"));
+    }
+
+    private void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void initEditContact() {
@@ -87,9 +102,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void initEdit(int record) {
-        wd.findElements(By.xpath("//td[8]/a/img")).get(record).click();
-    }
+
 
     public void clickUpdateContactButton() {
         click(By.name("update"));
@@ -154,9 +167,10 @@ public class ContactHelper extends HelperBase {
             String email3 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[3]")).getText();*/
 
             contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastname(lastname).withAddress(address));
-
+            //System.out.println("contacts size: " + contacts.size());
             i++;
         }
+        //System.out.println(contacts.size());
 
         return contacts;
     }
@@ -180,11 +194,20 @@ public class ContactHelper extends HelperBase {
         return row;
     }
 
-    public void modify(int index, ContactData contact) {
-        initEdit(index);
+    public void modify( ContactData contact) {
+        initEditById(contact.getId());
         fillForm(contact, false);
         clickUpdateContactButton();
 
+    }
+
+    public void initEditById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+                                                     //         edit.php?id=
+    }
+
+    public void initEdit(int record) {
+        wd.findElements(By.xpath("//td[8]/a/img")).get(record).click();
     }
 
 

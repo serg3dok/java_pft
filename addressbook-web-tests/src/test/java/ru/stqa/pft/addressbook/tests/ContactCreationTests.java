@@ -32,7 +32,7 @@ public class ContactCreationTests extends TestBase{
         Contacts after = app.contacts().all();
         //Assert.assertEquals(after.size(), before.size() +1);
         //before.add(newContact);
-        assertThat(after.size(), equalTo(before.size()));
+        assertThat(after.size(), equalTo(before.size()+1));
 
         assertThat(after, equalTo(
                 before.withAdded(newContact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));

@@ -40,12 +40,12 @@ public class ContactModificationTests extends TestBase {
 
         ContactData modifiedContact = before.iterator().next();
         int index = before.size() - 1;
-        ContactData contact = new ContactData().withFirstName("username").withMiddlename("middlename").withLastname("lastname").withNickname("nickname").withTitle("title").
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstName("username").withMiddlename("middlename").withLastname("lastname").withNickname("nickname").withTitle("title").
                 withCompany("company1").withAddress("address").withHomePhone("homePhone").withMobilePhone("mobilePhone").withWorkPhone("workPhone").withFaxPhone("faxPhone").
                 withEmail("email").withEmail2("email2").withEmail3("email3").withHomepage("homepage").withBirthdayYear("1980").withAnYear("2000").withAddress2("address2").
                 withHome2("home2").withNotes("notes");
-
-        app.contacts().modify(index, contact);
+      //  contact.setId();
+        app.contacts().modify(contact);
         app.goTo().homePage();
         Contacts after = app.contacts().all();
 
