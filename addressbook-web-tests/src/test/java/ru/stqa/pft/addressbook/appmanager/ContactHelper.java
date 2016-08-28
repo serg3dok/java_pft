@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class ContactHelper extends HelperBase {
 
+    private Contacts contactCache = null;
+
 
     public ContactHelper(WebDriver wd) {
         super(wd);
@@ -86,6 +88,7 @@ public class ContactHelper extends HelperBase {
         selectContactById(contact.getId());
         deleteSelectedContact();
         deletePop();
+        contactCache = null;
 
     }
 
@@ -118,6 +121,7 @@ public class ContactHelper extends HelperBase {
         initCreation();
         fillForm(contactData, true);
         sendContactForm();
+        contactCache = null;
 
 
     }
@@ -151,7 +155,10 @@ public class ContactHelper extends HelperBase {
 //    }
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> rows = wd.findElements(By.name("entry"));
 
         //System.out.println(rows.size());
@@ -166,13 +173,13 @@ public class ContactHelper extends HelperBase {
             String email2 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[2]")).getText();
             String email3 = wd.findElement(By.xpath("/*//*[@id='maintable']/tbody/tr[" + i +"]/td[5]/a[3]")).getText();*/
 
-            contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastname(lastname).withAddress(address));
+            contactCache.add(new ContactData().withId(id).withFirstName(firstname).withLastname(lastname).withAddress(address));
             //System.out.println("contacts size: " + contacts.size());
             i++;
         }
         //System.out.println(contacts.size());
 
-        return contacts;
+        return new Contacts(contactCache);
     }
 
     public int lastRowById(List<ContactData> before) {
@@ -198,6 +205,7 @@ public class ContactHelper extends HelperBase {
         initEditById(contact.getId());
         fillForm(contact, false);
         clickUpdateContactButton();
+        contactCache = null;
 
     }
 
