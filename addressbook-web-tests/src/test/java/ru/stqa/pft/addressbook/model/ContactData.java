@@ -35,8 +35,6 @@ public class ContactData {
         return this;
     }
 
-
-
     public String getAllPhones() {
         return allPhones;
     }

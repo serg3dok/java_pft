@@ -200,13 +200,65 @@ public class ContactHelper extends HelperBase {
         String email2 = wd.findElement(By.name("email2")).getAttribute("value");
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
 
-        System.out.println("infoFromEditForm: " + email);
-        System.out.println("infoFromEditForm: " + email2);
-        System.out.println("infoFromEditForm: " + email3);
 
         wd.navigate().back();
-        return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastname(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
+        return new ContactData().withId(contact.getId()).withFirstName(firstname)
+                .withLastname(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withEmail(email).withEmail2(email2).withEmail3(email3);
+
+    }
+
+    public ContactData infoFromContactDetailsPage(ContactData contact) {
+        clickOnContactDetailsById(contact.getId());
+
+        String contactDetailsRaw = wd.findElement(By.xpath("//*[@id='content']")).getText();
+
+
+        String firstname = contactDetailsRaw.split(" ")[0];
+        //String middlename = firstMiddleLastNames.split(" ")[1];
+        String lastname = contactDetailsRaw.split(" ")[2].split("\\n")[0];
+        String address = contactDetailsRaw.split("\\n")[4];
+
+        String phone = "";
+        String homePhone = "";
+        String mobilePhone = "";
+        String workPhone = "";
+
+        phone = contactDetailsRaw.split("\\n")[6];
+        if (phone.startsWith("H")) {
+            homePhone = phone.replace("H: ", "");
+        } else if (phone.startsWith("M")) {
+            mobilePhone = phone.replace("M: ", "");
+        } else if (phone.startsWith("W")) {
+            workPhone = phone.replace("W: ", "");
+        }
+
+        phone = contactDetailsRaw.split("\\n")[7];
+        if (phone.startsWith("H")) {
+            homePhone = phone.replace("H: ", "");
+        } else if (phone.startsWith("M")) {
+            mobilePhone = phone.replace("M: ", "");
+        } else if (phone.startsWith("W")) {
+            workPhone = phone.replace("W: ", "");
+        }
+
+        phone = contactDetailsRaw.split("\\n")[8];
+        if (phone.startsWith("H")) {
+            homePhone = phone.replace("H: ", "");
+        } else if (phone.startsWith("M")) {
+            mobilePhone = phone.replace("M: ", "");
+        } else if (phone.startsWith("W")) {
+            workPhone = phone.replace("W: ", "");
+        }
+
+        String email1 = wd.findElement(By.xpath("//*[@id='content']/a[1]")).getText();
+        String email2 = wd.findElement(By.xpath("//*[@id='content']/a[3]")).getText();
+        String email3 = wd.findElement(By.xpath("//*[@id='content']/a[5]")).getText();
+
+
+        wd.navigate().back();
+        return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastname(lastname).withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
+                .withEmail(email1).withEmail2(email2).withEmail3(email3);
 
     }
 
@@ -214,6 +266,11 @@ public class ContactHelper extends HelperBase {
     public void initContactModificationById(int id) {
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
         //         edit.php?id=
+    }
+
+    public void clickOnContactDetailsById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
+
     }
 
     public void initEditContact() {
