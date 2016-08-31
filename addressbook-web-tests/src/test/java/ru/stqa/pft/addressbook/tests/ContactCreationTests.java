@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 
@@ -22,10 +23,12 @@ public class ContactCreationTests extends TestBase{
         Contacts before = app.contacts().all();
         app.contacts().initCreation();
 
+        File photo = new File("src/test/resources/index.jpg").getAbsoluteFile();
+
         ContactData newContact = new ContactData().withFirstName("username").withMiddlename("middlename").withLastname("lastname").withNickname("nickname").withTitle("title").
                 withCompany("company1").withAddress("address").withHomePhone("homePhone").withMobilePhone("mobilePhone").withWorkPhone("workPhone").withFaxPhone("faxPhone").
                 withEmail("email").withEmail2("email2").withEmail3("email3").withHomepage("homepage").withBirthdayYear("1980").withAnYear("2000").withAddress2("address2").
-                withNotes("notes");
+                withNotes("notes").withPhoto(photo);
         app.contacts().create(newContact);
         app.goTo().homePage();
 
@@ -40,4 +43,6 @@ public class ContactCreationTests extends TestBase{
         assertThat(after, equalTo(
                 before.withAdded(newContact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
+
+
 }
