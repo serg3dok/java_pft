@@ -1,20 +1,4 @@
-firstname 0;lastname 0;address 0;home phone 0;mobile phone 0;work phone 0;email 1 0;email 2 0;email 3 0
-firstname 1;lastname 1;address 1;home phone 1;mobile phone 1;work phone 1;email 1 1;email 2 1;email 3 1
-firstname 2;lastname 2;address 2;home phone 2;mobile phone 2;work phone 2;email 1 2;email 2 2;email 3 2
-firstname 3;lastname 3;address 3;home phone 3;mobile phone 3;work phone 3;email 1 3;email 2 3;email 3 3
-firstname 4;lastname 4;address 4;home phone 4;mobile phone 4;work phone 4;email 1 4;email 2 4;email 3 4
-firstname 5;lastname 5;address 5;home phone 5;mobile phone 5;work phone 5;email 1 5;email 2 5;email 3 5
-firstname 6;lastname 6;address 6;home phone 6;mobile phone 6;work phone 6;email 1 6;email 2 6;email 3 6
-firstname 7;lastname 7;address 7;home phone 7;mobile phone 7;work phone 7;email 1 7;email 2 7;email 3 7
-firstname 8;lastname 8;address 8;home phone 8;mobile phone 8;work phone 8;email 1 8;email 2 8;email 3 8
-firstname 9;lastname 9;address 9;home phone 9;mobile phone 9;work phone 9;email 1 9;email 2 9;email 3 9
-firstname 10;lastname 10;address 10;home phone 10;mobile phone 10;work phone 10;email 1 10;email 2 10;email 3 10
-firstname 11;lastname 11;address 11;home phone 11;mobile phone 11;work phone 11;email 1 11;email 2 11;email 3 11
-firstname 12;lastname 12;address 12;home phone 12;mobile phone 12;work phone 12;email 1 12;email 2 12;email 3 12
-firstname 13;lastname 13;address 13;home phone 13;mobile phone 13;work phone 13;email 1 13;email 2 13;email 3 13
-firstname 14;lastname 14;address 14;home phone 14;mobile phone 14;work phone 14;email 1 14;email 2 14;email 3 14
-firstname 15;lastname 15;address 15;home phone 15;mobile phone 15;work phone 15;email 1 15;email 2 15;email 3 15
-firstname 16;lastname 16;address 16;home phone 16;mobile phone 16;work phone 16;email 1 16;email 2 16;email 3 16
-firstname 17;lastname 17;address 17;home phone 17;mobile phone 17;work phone 17;email 1 17;email 2 17;email 3 17
-firstname 18;lastname 18;address 18;home phone 18;mobile phone 18;work phone 18;email 1 18;email 2 18;email 3 18
-firstname 19;lastname 19;address 19;home phone 19;mobile phone 19;work phone 19;email 1 19;email 2 19;email 3 19
+ALbert;Cruz;address 0;home phone 0;mobile phone 0;work phone 0;email 1 0;email 2 0;email 3 0
+Susan;Stark;address 1;home phone 1;mobile phone 1;work phone 1;email 1 1;email 2 1;email 3 1
+RObert;Wolf 2;address 2;home phone 2;mobile phone 2;work phone 2;email 1 2;email 2 2;email 3 2
+Lora;Tulpan 3;address 3;home phone 3;mobile phone 3;work phone 3;email 1 3;email 2 3;email 3 3
