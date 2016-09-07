@@ -33,14 +33,7 @@ public class ContactDetailsTests extends TestBase{
         ContactData contactInfoDetails = app.contacts().infoFromContactDetailsPage(contact);
         ContactData contactInfoFromEditPage = app.contacts().infoFromEditForm(contact);
 
-
-//        System.out.println(contactInfoFromEditPage.getMobilePhone());
-//        System.out.println(contactInfoDetails.getMobilePhone());
-
-
-
         assertThat(contactInfoFromEditPage, equalTo(contactInfoDetails));
-
 
     }
 
