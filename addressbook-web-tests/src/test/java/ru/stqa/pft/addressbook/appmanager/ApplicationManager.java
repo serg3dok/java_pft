@@ -56,6 +56,8 @@ public class ApplicationManager {
 
         wd.get(properties.getProperty("web.baseUrl"));
 
+        String avatar = System.getProperty("avatarPhoto");
+
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
